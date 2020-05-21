@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "ambos.vanillafixes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "AbstractClientPlayerMixin",
+    "class_472Mixin",
+    "class_520Mixin",
+    "ClientPlayNetworkHandlerMixin",
+    "DeathScreenMixin",
+    "LoginThreadMixin",
+    "MinecraftMixin",
+    "RemoteClientPlayerMixin",
+    "ResourceDownloadThreadMixin",
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
