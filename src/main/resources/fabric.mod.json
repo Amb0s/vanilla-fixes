@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "vanillafixes",
+  "version": "${version}",
+  "name": "Vanilla Fixes",
+  "description": "",
+  "authors": [
+    "Ambos"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Amb0s",
+    "sources": "https://github.com/Amb0s/vanilla-fixes"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/vanillafixes/icon.png",
+  "environment": "*",
+  "mixins": [
+    "vanillafixes.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
