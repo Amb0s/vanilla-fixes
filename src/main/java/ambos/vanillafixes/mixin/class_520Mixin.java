@@ -13,7 +13,7 @@ final class class_520Mixin {
     private int field_2187;
 
     @Inject(method = "method_1721", at = @At("RETURN"), cancellable = true)
-    private void changeBlockHitDelay(CallbackInfo ci) {
+    private void changeHitDelay(CallbackInfo ci) {
         field_2187 = 0;
     }
 }

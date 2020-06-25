@@ -1,7 +1,11 @@
 package ambos.vanillafixes;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.shanerx.mojang.Mojang;
 import org.shanerx.mojang.PlayerProfile;
 import java.io.IOException;
@@ -12,7 +16,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public final class MinecraftUtil {
-    public final static ArrayList<String> RESOURCES_PROXY_URLs = new ArrayList<>(Arrays.asList(
+    private final static ArrayList<String> RESOURCES_PROXY_URLs = new ArrayList<>(Arrays.asList(
             "http://resourceproxy.pymcl.net/MinecraftResources/",
             "https://betacraft.pl/MinecraftResources/"
     ));
@@ -33,22 +37,46 @@ public final class MinecraftUtil {
             if (!(statusCode == 404)) {
                 return false;
             }
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
 
         return true;
     }
 
+    private static boolean isSlim(PlayerProfile playerProfile) {
+        JSONObject value = null;
+
+        try {
+            Optional<PlayerProfile.Property> property = playerProfile.getProperties().stream()
+                    .findFirst();
+
+            if(property.isPresent()) {
+                value = (JSONObject) new JSONParser()
+                        .parse(new String(Base64.decodeBase64(property.get().getValue())));
+            }
+
+        } catch (ParseException e) {
+            return true;
+        }
+
+        return value != null && value.toJSONString().contains(Mojang.SkinType.SLIM.toString());
+    }
+
     public static String getPlayerSkin(String username) {
         Mojang mojang = new Mojang();
-        String uuid = mojang.getUUIDOfUsername(username);
-        PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
-        Optional<URL> playerSkin = playerProfile.getTextures().get().getSkin();
 
-        if (playerSkin.isPresent()) {
-            logger.info("Getting player skin: " + playerSkin.get().toString());
-            return playerSkin.get().toString();
+        try {
+            String uuid = mojang.getUUIDOfUsername(username);
+            PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
+            Optional<URL> playerSkin = playerProfile.getTextures().flatMap(PlayerProfile.TexturesProperty::getSkin);
+
+            if (playerSkin.isPresent() && !isSlim(playerProfile)) {
+                logger.info("Getting player skin: " + playerSkin.get().toString());
+                return playerSkin.get().toString();
+            }
+        } catch (NullPointerException ignored) {
+
         }
 
         return null;
@@ -56,19 +84,24 @@ public final class MinecraftUtil {
 
     public static String getPlayerCape(String username) {
         Mojang mojang = new Mojang();
-        String uuid = mojang.getUUIDOfUsername(username);
-        PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
-        Optional<URL> playerCape = playerProfile.getTextures().get().getCape();
 
-        if (playerCape.isPresent()) {
-            logger.info("Getting player cape: " + playerCape.get().toString());
-            return playerCape.get().toString();
+        try {
+            String uuid = mojang.getUUIDOfUsername(username);
+            PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
+            Optional<URL> playerCape = playerProfile.getTextures().flatMap(PlayerProfile.TexturesProperty::getCape);
+
+            if (playerCape.isPresent()) {
+                logger.info("Getting player cape: " + playerCape.get().toString());
+                return playerCape.get().toString();
+            }
+        } catch (NullPointerException ignored) {
+
         }
 
         return null;
     }
 
-    public static String getResourcesURL() {
+    public static String getResources() {
         for (String url : RESOURCES_PROXY_URLs) {
             if (!isDown(url)) {
                 logger.info("Resource proxy found: " + url);
@@ -79,3 +112,4 @@ public final class MinecraftUtil {
         return null;
     }
 }
+
