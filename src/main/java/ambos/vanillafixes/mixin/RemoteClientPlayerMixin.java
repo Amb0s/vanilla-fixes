@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RemoteClientPlayer.class)
 abstract class RemoteClientPlayerMixin extends Player {
-    public RemoteClientPlayerMixin(Level level) {
+    private RemoteClientPlayerMixin(Level level) {
         super(level);
     }
 

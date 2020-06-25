@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractClientPlayer.class)
 abstract class AbstractClientPlayerMixin extends Player {
-    public AbstractClientPlayerMixin(Level level) {
+    private AbstractClientPlayerMixin(Level level) {
         super(level);
     }
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;toString()Ljava/lang/String;"))
-    private String toStr(StringBuilder builder, Minecraft minecraft, Level level, Session session, int integer) {
+    private String changeSkin(StringBuilder builder, Minecraft minecraft, Level level, Session session, int integer) {
         return MinecraftUtil.getPlayerSkin(session.username);
     }
 

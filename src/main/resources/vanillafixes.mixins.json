@@ -12,6 +12,7 @@
     "DeathScreenMixin",
     "LoginThreadMixin",
     "MinecraftMixin",
+    "PlayerMixin",
     "RemoteClientPlayerMixin",
     "ResourceDownloadThreadMixin",
     "TitleScreenMixin"
