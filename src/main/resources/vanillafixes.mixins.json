@@ -11,6 +11,8 @@
     "ClientPlayNetworkHandlerMixin",
     "DeathScreenMixin",
     "LoginThreadMixin",
+    "HatchetMixin",
+    "PickaxeMixin",
     "MinecraftMixin",
     "PlayerMixin",
     "RemoteClientPlayerMixin",
