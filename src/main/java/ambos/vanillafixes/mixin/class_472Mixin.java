@@ -31,7 +31,7 @@ final class class_472Mixin {
         this.field_2485_proxy = var8;
     }
 
-    @ModifyArgs(method = "method_1909", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V"))
+    @ModifyArgs(method = "method_1909", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V"), remap = false)
     private void changeType(Args args) {
         args.set(0, (float) ((double) this.field_2480 - this.field_2483_proxy));
         args.set(1, (float) ((double) this.field_2481 - this.field_2484_proxy));
