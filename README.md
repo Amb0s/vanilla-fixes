@@ -9,6 +9,7 @@
 * Stutter
 * Score display
 * Block hit delay in multiplayer
+* Tools
 
 ## Installation
 [Minecraft Cursed Legacy](https://minecraft-cursed-legacy.github.io/)
