@@ -10,6 +10,7 @@
 * Score display
 * Block hit delay in multiplayer
 * Tools
+* Fences
 
 ## Installation
 [Minecraft Cursed Legacy](https://minecraft-cursed-legacy.github.io/)
