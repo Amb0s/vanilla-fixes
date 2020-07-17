@@ -16,9 +16,10 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public final class MinecraftUtil {
-    private final static ArrayList<String> RESOURCES_PROXY_URLs = new ArrayList<>(Arrays.asList(
+    private final static ArrayList<String> PROXY_URLs = new ArrayList<>(Arrays.asList(
             "http://resourceproxy.pymcl.net/MinecraftResources/",
-            "https://betacraft.pl/MinecraftResources/"
+            "https://betacraft.pl/MinecraftResources/",
+            "http://mcresources.modification-station.net/MinecraftResources/"
     ));
 
     private static final Logger logger = LogManager.getLogger(MinecraftUtil.class);
@@ -102,9 +103,9 @@ public final class MinecraftUtil {
     }
 
     public static String getResources() {
-        for (String url : RESOURCES_PROXY_URLs) {
+        for (String url : PROXY_URLs) {
             if (!isDown(url)) {
-                logger.info("Resource proxy found: " + url);
+                logger.info("Resources proxy found: " + url);
                 return url;
             }
         }
