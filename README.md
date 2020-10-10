@@ -1,6 +1,8 @@
 # Vanilla Fixes
 
 ## Fixes
+
+### SSP
 * Skins
 * Capes
 * Sounds
@@ -11,6 +13,8 @@
 * Block hit delay in multiplayer
 * Tools
 * Fences
+* Stairs
+* Boats
 
 ## Installation
 [Minecraft Cursed Legacy](https://minecraft-cursed-legacy.github.io/)
