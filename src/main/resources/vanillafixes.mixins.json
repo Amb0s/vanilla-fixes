@@ -3,6 +3,7 @@
   "package": "ambos.vanillafixes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "StairsMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

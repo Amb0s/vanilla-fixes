@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Hatchet.class)
-public class HatchetMixin {
+final class HatchetMixin {
     @Shadow
     private static Tile[] effectiveBlocks = new Tile[]{
             Tile.WOOD, Tile.BOOKSHELF, Tile.LOG, Tile.CHEST, Tile.WORKBENCH,
