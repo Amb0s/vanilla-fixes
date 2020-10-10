@@ -24,7 +24,7 @@ final class class_472Mixin {
     @Shadow
     private int field_2482;
 
-    @Inject(method = "method_1912", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "method_1912", at = @At("RETURN"))
     private void onMethod_1912(int var1, int var2, int var3, double var4, double var6, double var8, CallbackInfo ci) {
         this.field_2483_proxy = var4;
         this.field_2484_proxy = var6;

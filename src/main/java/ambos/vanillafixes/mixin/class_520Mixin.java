@@ -12,7 +12,7 @@ final class class_520Mixin {
     @Shadow
     private int field_2187;
 
-    @Inject(method = "method_1721", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "method_1721", at = @At("RETURN"))
     private void changeHitDelay(CallbackInfo ci) {
         field_2187 = 0;
     }

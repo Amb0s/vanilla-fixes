@@ -11,6 +11,7 @@ import org.shanerx.mojang.PlayerProfile;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -65,9 +66,8 @@ public final class MinecraftUtil {
     }
 
     public static String getPlayerSkin(String username) {
-        Mojang mojang = new Mojang();
-
         try {
+            Mojang mojang = new Mojang();
             String uuid = mojang.getUUIDOfUsername(username);
             PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
             Optional<URL> playerSkin = playerProfile.getTextures().flatMap(PlayerProfile.TexturesProperty::getSkin);
@@ -76,7 +76,7 @@ public final class MinecraftUtil {
                 logger.info("Getting player skin: " + playerSkin.get().toString());
                 return playerSkin.get().toString();
             }
-        } catch (NullPointerException ignored) {
+        } catch (RuntimeException ignored) {
 
         }
 
@@ -84,9 +84,8 @@ public final class MinecraftUtil {
     }
 
     public static String getPlayerCape(String username) {
-        Mojang mojang = new Mojang();
-
         try {
+            Mojang mojang = new Mojang();
             String uuid = mojang.getUUIDOfUsername(username);
             PlayerProfile playerProfile = mojang.getPlayerProfile(uuid);
             Optional<URL> playerCape = playerProfile.getTextures().flatMap(PlayerProfile.TexturesProperty::getCape);
@@ -95,7 +94,7 @@ public final class MinecraftUtil {
                 logger.info("Getting player cape: " + playerCape.get().toString());
                 return playerCape.get().toString();
             }
-        } catch (NullPointerException ignored) {
+        } catch (RuntimeException ignored) {
 
         }
 

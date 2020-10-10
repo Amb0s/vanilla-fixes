@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TitleScreen.class)
 final class TitleScreenMixin extends Screen {
-    @Inject(method = "init", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "init", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
         minecraft.isApplet = false;
     }
