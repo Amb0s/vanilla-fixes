@@ -1,6 +1,6 @@
 # Vanilla Fixes
 
-## Fixes 'client only)
+## Fixes (client only)
 
 * Skins
 * Capes
