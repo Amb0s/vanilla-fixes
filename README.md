@@ -1,14 +1,13 @@
 # Vanilla Fixes
 
-## Fixes
+## Fixes 'client only)
 
-### SSP
 * Skins
 * Capes
 * Sounds
 * Authentication
 * Depth buffer
-* Stutter
+* Jittering
 * Score display
 * Block hit delay in multiplayer
 * Tools
