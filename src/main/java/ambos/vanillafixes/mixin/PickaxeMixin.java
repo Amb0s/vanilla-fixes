@@ -1,19 +1,20 @@
 package ambos.vanillafixes.mixin;
 
 import net.minecraft.item.tool.Pickaxe;
-import net.minecraft.tile.Tile;
+import net.minecraft.block.BlockBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Pickaxe.class)
 final class PickaxeMixin {
     @Shadow
-    private static Tile[] effectiveBlocks = new Tile[]{
-            Tile.STONEBRICK, Tile.DOUBLE_STONE_SLAB, Tile.STONE_SLAB,
-            Tile.STONE, Tile.SANDSTONE, Tile.MOSSY_COBBLESTONE, Tile.IRON_ORE, Tile.BLOCK_IRON, Tile.COAL_ORE,
-            Tile.BLOCK_GOLD, Tile.GOLD_ORE, Tile.ORE_DIAMOND, Tile.BLOCK_DIAMOND, Tile.ICE, Tile.NETHERRACK,
-            Tile.LAPIS_LAZULI_ORE, Tile.LAPIS_LAZULI_BLOCK, Tile.REDSTONE_ORE, Tile.REDSTONE_ORE_LIT, Tile.STAIRS_STONE,
-            Tile.DOOR_IRON, Tile.BRICK, Tile.FURNACE, Tile.FURNACE_LIT, Tile.DISPENSER, Tile.STONE_PRESSURE_PLATE,
-            Tile.RAIL, Tile.DETECTOR_RAIL, Tile.GOLDEN_RAIL
+    private static BlockBase[] effectiveBlocks = new BlockBase[]{
+            BlockBase.BRICKS, BlockBase.DOUBLE_STONE_SLAB, BlockBase.STONE_SLAB,
+            BlockBase.STONE, BlockBase.SANDSTONE, BlockBase.MOSSY_COBBLESTONE, BlockBase.IRON_ORE, BlockBase.IRON_BLOCK,
+            BlockBase.COAL_ORE, BlockBase.GOLD_BLOCK, BlockBase.GOLD_ORE, BlockBase.DIAMOND_ORE, BlockBase.DIAMOND_BLOCK,
+            BlockBase.ICE, BlockBase.NETHERRACK, BlockBase.LAPIS_LAZULI_ORE, BlockBase.LAPIS_LAZULI_BLOCK,
+            BlockBase.REDSTONE_ORE, BlockBase.REDSTONE_ORE_LIT, BlockBase.COBBLESTONE_STAIRS, BlockBase.IRON_DOOR,
+            BlockBase.COBBLESTONE, BlockBase.FURNACE, BlockBase.FURNACE_LIT, BlockBase.DISPENSER,
+            BlockBase.STONE_PRESSURE_PLATE, BlockBase.RAIL, BlockBase.DETECTOR_RAIL, BlockBase.GOLDEN_RAIL
     };
 }

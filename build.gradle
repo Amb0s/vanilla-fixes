@@ -4,16 +4,20 @@ buildscript {
 		jcenter()
 		maven {
 			name = "Fabric"
-	 		url = "https://maven.fabricmc.net/"
+			url = "https://maven.fabricmc.net/"
 		}
-		maven { 
+		maven {
 			name = "Jitpack"
 			url 'https://jitpack.io/'
 		}
 	}
 	dependencies {
-		classpath 'com.github.Chocohead:Fabric-Loom:bbaa5d7'
+		classpath 'com.github.Chocohead:Fabric-Loom:e3d1762'
 	}
+}
+
+plugins {
+	id 'maven-publish'
 }
 
 apply plugin: "fabric-loom"
@@ -25,8 +29,20 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+idea {
+	module {
+		downloadJavadoc = true
+	}
+}
+
+eclipse {
+	classpath {
+		downloadJavadoc = true
+	}
+}
+
 repositories {
-	maven { 
+	maven {
 		name = "Jitpack"
 		url "https://jitpack.io/"
 	}
@@ -39,15 +55,17 @@ dependencies {
 	// fabric loader requires log4j, guava, and gson
 	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
 	implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
+	annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+	annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
 	implementation 'com.google.guava:guava:28.0-jre'
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
 
-	// mixin and fabric loader need asm 8
-	implementation 'org.ow2.asm:asm:8.0'
-	implementation 'org.ow2.asm:asm-analysis:8.0'
-	implementation 'org.ow2.asm:asm-commons:8.0'
-	implementation 'org.ow2.asm:asm-tree:8.0'
-	implementation 'org.ow2.asm:asm-util:8.0'
+	// mixin and fabric loader need asm 9
+	implementation 'org.ow2.asm:asm:9.0'
+	implementation 'org.ow2.asm:asm-analysis:9.0'
+	implementation 'org.ow2.asm:asm-commons:9.0'
+	implementation 'org.ow2.asm:asm-tree:9.0'
+	implementation 'org.ow2.asm:asm-util:9.0'
 	
 	// java mojang API
 	include group: 'commons-codec', name: 'commons-codec', version: '1.14'
@@ -61,17 +79,22 @@ dependencies {
 	implementation 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
 	include 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
 
-	//to change the versions see the gradle.properties file
+	// to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
-	mappings loom.fromCommit("minecraft-cursed-legacy/Plasma", "b464f27") {spec ->
-		spec.version = "b1.7.3-12"
+	mappings loom.fromCommit("calmilamsy/BIN-Mappings", "${project.yarn_mappings}") {spec ->
+		spec.version = "b1.7.3-${project.yarn_mappings}"
 	}
 
-	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
+	// convenience stuff
+	// adds some useful annotations for data classes. does not add any dependencies
+	compileOnly 'org.projectlombok:lombok:1.18.16'
+	annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
-	// API. You technically don't need it, but it's extremely useful for not having to write the same code in every mod.
-	modImplementation "com.github.minecraft-cursed-legacy:Cursed-Legacy-API:${project.api_version}"
+	// adds some useful annotations for miscellaneous uses. does not add any dependencies, though people without the lib will be missing some useful context hints.
+	compile 'org.jetbrains:annotations:16.0.2'
+
+	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 }
 
 processResources {
@@ -100,4 +123,39 @@ tasks.withType(JavaCompile) {
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = "sources"
 	from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+	from javadoc
+	classifier = 'javadoc'
+}
+
+tasks.publishToMavenLocal.dependsOn(tasks.remapJar)
+
+publishing {
+	repositories {
+		mavenLocal()
+	}
+
+	publications {
+		mavenJava(MavenPublication) {
+			artifactId project.archives_base_name
+			artifact ("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}.jar") {
+				classifier null
+				builtBy remapJar
+			}
+
+			artifact ("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}-dev.jar") {
+				classifier 'dev'
+				builtBy remapJar
+			}
+			pom.withXml {
+				asNode().dependencies.dependency.each { dep ->
+					if(dep.artifactId.last().value().last().toLowerCase() in ["cursed-fabric-loader", "stationapi"]) {
+						assert dep.parent().remove(dep)
+					}
+				}
+			}
+		}
+	}
 }

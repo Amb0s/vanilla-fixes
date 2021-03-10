@@ -1,7 +1,7 @@
 package ambos.vanillafixes.mixin;
 
 import net.minecraft.level.Level;
-import net.minecraft.tile.Fence;
+import net.minecraft.block.Fence;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

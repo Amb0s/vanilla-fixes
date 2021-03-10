@@ -8,19 +8,21 @@
   "client": [
     "AbstractClientPlayerMixin",
     "BoatMixin",
-    "class_472Mixin",
-    "class_520Mixin",
     "ClientPlayNetworkHandlerMixin",
-    "DeathScreenMixin",
+    "DeathMixin",
+    "EntityBaseMixin",
     "FenceMixin",
     "HatchetMixin",
     "LoginThreadMixin",
+    "MainMenuMixin",
     "MinecraftMixin",
     "PickaxeMixin",
-    "PlayerMixin",
+    "PlayerBaseMixin",
+    "RemoteClientInteractionManagerMixin",
     "RemoteClientPlayerMixin",
-    "ResourceDownloadThreadMixin",
-    "TitleScreenMixin"
+    "RenderListMixin",
+    "StairsMixin",
+    "ThreadDownloadResourcesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
