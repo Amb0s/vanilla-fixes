@@ -1,9 +1,9 @@
 package ambos.vanillafixes.mixin;
 
 import net.minecraft.level.Level;
-import net.minecraft.tile.Stairs;
-import net.minecraft.tile.Tile;
-import net.minecraft.tile.material.Material;
+import net.minecraft.block.Stairs;
+import net.minecraft.block.BlockBase;
+import net.minecraft.block.material.Material;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Random;
 
 @Mixin(Stairs.class)
-final class StairsMixin extends Tile {
+final class StairsMixin extends BlockBase {
     private StairsMixin(int id, Material material) {
         super(id, material);
     }

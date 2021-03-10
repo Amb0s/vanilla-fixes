@@ -1,6 +1,6 @@
 package ambos.vanillafixes.mixin;
 
-import net.minecraft.class_472;
+import net.minecraft.client.render.RenderList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(class_472.class)
-final class class_472Mixin {
+@Mixin(RenderList.class)
+final class RenderListMixin {
     private double field_2483_proxy;
     private double field_2484_proxy;
     private double field_2485_proxy;

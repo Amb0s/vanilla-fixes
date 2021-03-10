@@ -1,7 +1,7 @@
 package ambos.vanillafixes.mixin;
 
 import ambos.vanillafixes.MinecraftUtil;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.entity.player.RemoteClientPlayer;
 import net.minecraft.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RemoteClientPlayer.class)
-abstract class RemoteClientPlayerMixin extends Player {
+abstract class RemoteClientPlayerMixin extends PlayerBase {
     private RemoteClientPlayerMixin(Level level) {
         super(level);
     }
