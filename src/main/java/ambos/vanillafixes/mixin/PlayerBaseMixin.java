@@ -22,7 +22,7 @@ final class PlayerBaseMixin extends Living {
         super(level);
     }
 
-    @Inject(method = "initCloak", at = @At("RETURN"))
+    @Inject(method = "initCloak", at = @At("RETURN"), require = 0)
     private void onInitCloak(CallbackInfo ci) {
         playerCloakUrl = MinecraftUtil.getPlayerCape(name);
         cloakUrl = playerCloakUrl;
