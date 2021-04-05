@@ -16,12 +16,12 @@ abstract class RemoteClientPlayerMixin extends PlayerBase {
         super(level);
     }
 
-    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;toString()Ljava/lang/String;"))
+    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;toString()Ljava/lang/String;"), require = 0)
     private String toStr(StringBuilder builder, Level level, String username) {
         return MinecraftUtil.getPlayerSkin(username);
     }
 
-    @Inject(method = "<init>", at = @At("RETURN"))
+    @Inject(method = "<init>", at = @At("RETURN"), require = 0)
     private void RemoteClientPlayer(Level level, String username, CallbackInfo ci) {
         if (username != null && username.length() > 0) {
             cloakUrl = MinecraftUtil.getPlayerCape(username);

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ClientPlayNetworkHandler.class)
 final class ClientPlayNetworkHandlerMixin {
-    @ModifyConstant(method = "method_1471", constant = @Constant(stringValue = "http://www.minecraft.net/game/joinserver.jsp?user="))
+    @ModifyConstant(method = "method_1471", constant = @Constant(stringValue = "http://www.minecraft.net/game/joinserver.jsp?user="), require = 0)
     private String changeURL(String url) {
         return "http://session.minecraft.net/game/joinserver.jsp?user=";
     }

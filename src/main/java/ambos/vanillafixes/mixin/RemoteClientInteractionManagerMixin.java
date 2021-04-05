@@ -12,7 +12,7 @@ final class RemoteClientInteractionManagerMixin {
     @Shadow
     private int hitDelay;
 
-    @Inject(method = "method_1721", at = @At("RETURN"))
+    @Inject(method = "method_1721", at = @At("RETURN"), require = 0)
     private void changeHitDelay(CallbackInfo ci) {
         hitDelay = 0;
     }

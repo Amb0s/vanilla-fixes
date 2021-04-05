@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ThreadDownloadResources.class)
 final class ThreadDownloadResourcesMixin {
-    @ModifyConstant(method = "run", constant = @Constant(stringValue = "http://s3.amazonaws.com/MinecraftResources/"), remap = false)
+    @ModifyConstant(method = "run", constant = @Constant(stringValue = "http://s3.amazonaws.com/MinecraftResources/"), remap = false, require = 0)
     private String changeURL(String url) {
         return MinecraftUtil.getResources();
     }

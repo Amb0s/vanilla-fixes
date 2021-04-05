@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Minecraft.class)
 final class MinecraftMixin {
-    @Redirect(method = "init", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;create()V"), require = 0, remap = false)
+    @Redirect(method = "init", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;create()V"), remap = false, require = 0)
     private void changeDepthBuffer() {
         PixelFormat pixelformat = new PixelFormat();
         pixelformat = pixelformat.withDepthBits(24);

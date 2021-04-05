@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Fence.class)
 final class FenceMixin {
-    @Inject(method = "canPlaceAt", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "canPlaceAt", at = @At("RETURN"), cancellable = true, require = 0)
     private void onCanPlaceAt(Level level, int x, int y, int z, CallbackInfoReturnable cir) {
         cir.setReturnValue(true);
     }

@@ -20,17 +20,17 @@ abstract class BoatMixin extends EntityBase {
         super(level);
     }
 
-    @Inject(method = "<init>", at = @At("RETURN"))
+    @Inject(method = "<init>", at = @At("RETURN"), require = 0)
     private void onInit(CallbackInfo ci) {
         field_1624 = false;
     }
 
-    @Redirect(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Boat;dropItem(IIF)Lnet/minecraft/entity/Item;"))
+    @Redirect(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Boat;dropItem(IIF)Lnet/minecraft/entity/Item;"), require = 0)
     private Item onDropItem(Boat boat, int i, int j, float f) {
         return null;
     }
 
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Boat;remove()V"), cancellable = true)
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Boat;remove()V"), cancellable = true, require = 0)
     private void dropBoat(CallbackInfoReturnable<Boolean> ci) {
         this.dropItem(ItemBase.boat.id, 1, 0.0F);
     }

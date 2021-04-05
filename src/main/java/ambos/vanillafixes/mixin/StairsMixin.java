@@ -18,12 +18,12 @@ final class StairsMixin extends BlockBase {
         super(id, material);
     }
 
-    @Inject(method = "getDropId", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getDropId", at = @At("RETURN"), cancellable = true, require = 0)
     private void onGetDropId(int meta, Random rand, CallbackInfoReturnable cir) {
         cir.setReturnValue(id);
     }
 
-    @Inject(method = "beforeDestroyedByExplosion", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "beforeDestroyedByExplosion", at = @At("HEAD"), cancellable = true, require = 0)
     private void onBeforeDestroyedByExplosion(Level level, int x, int y, int z, int meta, float dropChance, CallbackInfo ci) {
         super.beforeDestroyedByExplosion(level, x, y, z, meta, dropChance);
         ci.cancel();

@@ -18,12 +18,12 @@ abstract class AbstractClientPlayerMixin extends PlayerBase {
         super(level);
     }
 
-    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;toString()Ljava/lang/String;"))
+    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;toString()Ljava/lang/String;"), require = 0)
     private String changeSkin(StringBuilder builder, Minecraft minecraft, Level level, Session session, int integer) {
         return MinecraftUtil.getPlayerSkin(session.username);
     }
 
-    @Inject(method = "<init>", at = @At("RETURN"))
+    @Inject(method = "<init>", at = @At("RETURN"), require = 0)
     private void AbstractClientPlayer(Minecraft minecraft, Level level, Session session, int integer, CallbackInfo ci) {
         if (session != null && session.username != null && session.username.length() > 0) {
             cloakUrl = MinecraftUtil.getPlayerCape(session.username);

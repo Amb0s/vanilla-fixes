@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MainMenu.class)
 final class MainMenuMixin extends ScreenBase {
-    @Inject(method = "init", at = @At("HEAD"))
+    @Inject(method = "init", at = @At("HEAD"), require = 0)
     private void onInit(CallbackInfo ci) {
         minecraft.isApplet = false;
     }
