@@ -1,161 +1,76 @@
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-		maven {
-			name = "Fabric"
-			url = "https://maven.fabricmc.net/"
-		}
-		maven {
-			name = "Jitpack"
-			url 'https://jitpack.io/'
-		}
-	}
-	dependencies {
-		classpath 'com.github.Chocohead:Fabric-Loom:e3d1762'
-	}
-}
-
 plugins {
-	id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
 }
+// No babric loom here
 
-apply plugin: "fabric-loom"
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-archivesBaseName = project.archives_base_name
+group = project.mod_group
+archivesBaseName = project.mod_name
 version = project.mod_version
-group = project.maven_group
-
-idea {
-	module {
-		downloadJavadoc = true
-	}
-}
-
-eclipse {
-	classpath {
-		downloadJavadoc = true
-	}
-}
 
 repositories {
-	maven {
-		name = "Jitpack"
-		url "https://jitpack.io/"
-	}
+    mavenCentral()
+    maven {
+        name = 'Babric'
+        url = 'https://maven.glass-launcher.net/babric'
+    }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
 }
 
-minecraft {
-}
-
+// We use shadow here to avoid the following dependencies being shadowed.
+// If you want to add your own dependency, you should also use 'shadow' most of the time.
+// Yet, if you want to include your dependency, use normal 'implementation' instead.
 dependencies {
-	// fabric loader requires log4j, guava, and gson
-	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
-	implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
-	annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
-	annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
-	implementation 'com.google.guava:guava:28.0-jre'
-	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    shadow "org.ow2.asm:asm:${project.asm_version}"
+    shadow "org.ow2.asm:asm-analysis:${project.asm_version}"
+    shadow "org.ow2.asm:asm-commons:${project.asm_version}"
+    shadow "org.ow2.asm:asm-tree:${project.asm_version}"
+    shadow "org.ow2.asm:asm-util:${project.asm_version}"
 
-	// mixin and fabric loader need asm 9
-	implementation 'org.ow2.asm:asm:9.0'
-	implementation 'org.ow2.asm:asm-analysis:9.0'
-	implementation 'org.ow2.asm:asm-commons:9.0'
-	implementation 'org.ow2.asm:asm-tree:9.0'
-	implementation 'org.ow2.asm:asm-util:9.0'
-	
-	// java mojang API
-	include group: 'commons-codec', name: 'commons-codec', version: '1.14'
-	include group: 'commons-logging', name: 'commons-logging', version: '1.2'
-	include group: 'org.apache.httpcomponents', name: 'httpasyncclient', version: '4.1.4'
-	include group: 'org.apache.httpcomponents', name: 'httpcore-nio', version: '4.4.13'
-	include group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.13'
-	include group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.8'
-	include group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
-	include group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-	implementation 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
-	include 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
+    shadow("net.fabricmc:sponge-mixin:${project.mixin_version}") {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+    }
 
-	// to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    shadow "babric:fabric-loader:${project.loader_version}"
 
-	mappings loom.fromCommit("calmilamsy/BIN-Mappings", "${project.yarn_mappings}") {spec ->
-		spec.version = "b1.7.3-${project.yarn_mappings}"
-	}
+    shadow files('libs/bta.jar')
 
-	// convenience stuff
-	// adds some useful annotations for data classes. does not add any dependencies
-	compileOnly 'org.projectlombok:lombok:1.18.16'
-	annotationProcessor 'org.projectlombok:lombok:1.18.16'
-
-	// adds some useful annotations for miscellaneous uses. does not add any dependencies, though people without the lib will be missing some useful context hints.
-	compile 'org.jetbrains:annotations:16.0.2'
-
-	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
+    shadow "org.slf4j:slf4j-api:1.8.0-beta4"
+    shadow 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2'
 }
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile) {
+	options.release.set 8
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
+}
+
+shadowJar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
+}
+
+jar.finalizedBy tasks.shadowJar
 
 processResources {
-	inputs.property "version", project.version
+    inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
-}
-
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar) {
-	from javadoc
-	classifier = 'javadoc'
-}
-
-tasks.publishToMavenLocal.dependsOn(tasks.remapJar)
-
-publishing {
-	repositories {
-		mavenLocal()
-	}
-
-	publications {
-		mavenJava(MavenPublication) {
-			artifactId project.archives_base_name
-			artifact ("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}.jar") {
-				classifier null
-				builtBy remapJar
-			}
-
-			artifact ("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}-dev.jar") {
-				classifier 'dev'
-				builtBy remapJar
-			}
-			pom.withXml {
-				asNode().dependencies.dependency.each { dep ->
-					if(dep.artifactId.last().value().last().toLowerCase() in ["cursed-fabric-loader", "stationapi"]) {
-						assert dep.parent().remove(dep)
-					}
-				}
-			}
-		}
-	}
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
 }

@@ -1,27 +1,15 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "ambos.vanillafixes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "StairsMixin"
   ],
   "client": [
-    "AbstractClientPlayerMixin",
-    "BoatMixin",
-    "ClientPlayNetworkHandlerMixin",
-    "DeathMixin",
-    "EntityBaseMixin",
-    "FenceMixin",
-    "HatchetMixin",
-    "LoginThreadMixin",
-    "MainMenuMixin",
-    "MinecraftMixin",
-    "PickaxeMixin",
-    "PlayerBaseMixin",
-    "RemoteClientInteractionManagerMixin",
-    "RemoteClientPlayerMixin",
+    "GuiGameOverMixin",
+    "GuiMainMenuMixin",
     "RenderListMixin",
-    "StairsMixin",
+    "ThreadCheckHasPaidMixin",
     "ThreadDownloadResourcesMixin"
   ],
   "injectors": {

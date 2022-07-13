@@ -8,17 +8,17 @@
     "Ambos"
   ],
   "contact": {
-    "issues": "https://github.com/Amb0s/vanilla-fixes/issues",
-    "sources": "https://github.com/Amb0s/vanilla-fixes"
+    "homepage": "https://github.com/Amb0s/vanilla-fixes",
+    "sources": "https://github.com/Amb0s/vanilla-fixes",
+    "issues": "https://github.com/Amb0s/vanilla-fixes/issues"
   },
-  "license": "LGPL-3.0-only",
+  "license": "MIT",
   "icon": "assets/vanillafixes/icon.png",
   "environment": "*",
   "mixins": [
     "vanillafixes.mixins.json"
   ],
   "depends": {
-    "fabricloader": "*",
-    "minecraft": "1.0.0-beta.7.3"
+    "fabricloader": ">=0.13.3"
   }
 }

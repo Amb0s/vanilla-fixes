@@ -1,6 +1,6 @@
 package ambos.vanillafixes.mixin;
 
-import net.minecraft.client.render.RenderList;
+import net.minecraft.src.RenderList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,32 +9,33 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(RenderList.class)
-final class RenderListMixin {
-    private double field_2483_proxy;
-    private double field_2484_proxy;
-    private double field_2485_proxy;
+@Mixin(value = RenderList.class, remap = false)
+public class RenderListMixin {
+    private double field_1239_d_store;
+    private double field_1238_e_store;
+    private double field_1237_f_store;
 
     @Shadow
-    private int field_2480;
+    private int field_1242_a;
 
     @Shadow
-    private int field_2481;
+    private int field_1241_b;
 
     @Shadow
-    private int field_2482;
+    private int field_1240_c;
 
-    @Inject(method = "method_1912", at = @At("RETURN"), require = 0)
-    private void onMethod_1912(int var1, int var2, int var3, double var4, double var6, double var8, CallbackInfo ci) {
-        this.field_2483_proxy = var4;
-        this.field_2484_proxy = var6;
-        this.field_2485_proxy = var8;
+    @Inject(method = "func_861_a", at = @At("RETURN"), cancellable = true, require = 0)
+    private void onFunc_861_a(int i, int j, int k, double d, double d1, double d2, CallbackInfo ci) {
+        this.field_1239_d_store = d;
+        this.field_1238_e_store = d1;
+        this.field_1237_f_store = d2;
     }
 
-    @ModifyArgs(method = "method_1909", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V"), remap = false, require = 0)
+    @ModifyArgs(method = "func_860_a", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V"),
+            require = 0)
     private void changeType(Args args) {
-        args.set(0, (float) ((double) this.field_2480 - this.field_2483_proxy));
-        args.set(1, (float) ((double) this.field_2481 - this.field_2484_proxy));
-        args.set(2, (float) ((double) this.field_2482 - this.field_2485_proxy));
+        args.set(0, (float) ((double) this.field_1242_a - this.field_1239_d_store));
+        args.set(1, (float) ((double) this.field_1241_b - this.field_1238_e_store));
+        args.set(2, (float) ((double) this.field_1240_c - this.field_1237_f_store));
     }
 }
