@@ -8,9 +8,7 @@
     "client": [
         "GuiGameOverMixin",
         "GuiMainMenuMixin",
-        "RenderListMixin",
-        "ThreadCheckHasPaidMixin",
-        "ThreadDownloadResourcesMixin"
+        "RenderListMixin"
     ],
     "injectors": {
         "defaultRequire": 1
