@@ -12,7 +12,7 @@ final class GuiMainMenuMixin extends GuiScreen {
     @Inject(method = "initGui", at = @At("RETURN"), cancellable = true, require = 0)
     private void removeLinks(CallbackInfo ci) {
         for (int i = 1; i <= 3; i++) { // Removes the last 3 buttons (links) from the main menu.
-            this.controlList.remove(this.controlList.size() - 1);
+            this.controlList.remove(this.controlList.size() - 2); // Skip the Mod Menu button.
         }
     }
 }
