@@ -9,10 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = GuiMainMenu.class, remap = false)
 final class GuiMainMenuMixin extends GuiScreen {
-    @Inject(method = "initGui", at = @At("RETURN"), cancellable = true, require = 0)
+    @Inject(method = "initGui", at = @At("RETURN"), require = 0)
     private void removeLinks(CallbackInfo ci) {
-        for (int i = 1; i <= 3; i++) { // Removes the last 3 buttons (links) from the main menu.
-            this.controlList.remove(this.controlList.size() - 2); // Skip the Mod Menu button.
-        }
+        controlList.removeIf(button -> button.id == 5 || button.id == 6 || button.id == 7); // Remove the links
     }
 }
