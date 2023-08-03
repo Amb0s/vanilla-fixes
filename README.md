@@ -1,12 +1,12 @@
 # Vanilla Fixes
 
 ## Fixes
-
 * Jittering
-* Score display
+
+## Improvements
 * Minimal main menu
 
 ## Instructions
 
-Check the [BTA! modding wiki](https://github.com/Amb0s/bta-modding-documentation/wiki)
+Soon...
 

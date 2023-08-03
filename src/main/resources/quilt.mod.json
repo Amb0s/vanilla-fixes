@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "entrypoints": {
+      "main": [
+        "ambos.vanillafixes.VanillaFixes"
+      ]
+    },
+    "group": "ambos",
+    "id":"vanillafixes",
+    "version": "3.0.0",
+    "intermediate_mappings": "net.fabricmc:intermediary"
+  },
+  "mixin": [
+    "vanillafixes.mixins.json"
+  ]
+}
