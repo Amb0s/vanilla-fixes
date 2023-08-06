@@ -2,31 +2,27 @@
   "schemaVersion": 1,
   "id": "vanillafixes",
   "version": "${version}",
-
   "name": "Vanilla Fixes",
   "description": "Fixes some issues present in the base game.",
   "authors": [
     "Ambos"
   ],
   "contact": {
-    "homepage": "https://github.com/Amb0s/vanilla-fixes",
-    "sources": "https://github.com/Amb0s/vanilla-fixes",
-    "issues": "https://github.com/Amb0s/vanilla-fixes/issues"
+    "homepage": "https://github.com/Turnip-Labs",
+    "sources": "https://github.com/Turnip-Labs/vanilla-fixes",
+    "issues": "https://github.com/Turnip-Labs/vanilla-fixes/issues"
   },
-
   "license": "MIT",
   "icon": "icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ambos.vanillafixes.VanillaFixes"
+      "turniplabs.vanillafixes.VanillaFixes"
     ]
   },
   "mixins": [
     "vanillafixes.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3"
   },

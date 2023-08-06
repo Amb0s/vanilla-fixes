@@ -1,4 +1,4 @@
-package ambos.vanillafixes.mixin;
+package turniplabs.vanillafixes.mixin;
 
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
