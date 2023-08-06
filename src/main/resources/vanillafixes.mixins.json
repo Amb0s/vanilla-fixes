@@ -7,7 +7,7 @@
     ],
     "client": [
         "GuiMainMenuMixin",
-        "RenderListMixin"
+        "DisplayListMixin"
     ],
     "injectors": {
         "defaultRequire": 1
