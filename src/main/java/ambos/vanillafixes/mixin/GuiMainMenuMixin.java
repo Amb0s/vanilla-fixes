@@ -17,7 +17,7 @@ final class GuiMainMenuMixin extends GuiScreen {
 
     @Inject(method = "initGui", at = @At("RETURN"), require = 0)
     private void removeButtons(CallbackInfo ci) {
-        controlList.removeIf(button -> button.id == 3 || button.id == 8);
+        controlList.removeIf(button -> button.id == 3 || button.id == 8 || button.id == 100);
     }
 
     @ModifyArgs(method = "drawScreen", at = @At(value = "INVOKE",
