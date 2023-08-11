@@ -1,10 +1,14 @@
 # Vanilla Fixes
 
 ## Fixes
-* Jittering
+* Removed jittering
+* Reduced block hit delays
+* Changed mod resources directory path
+* Fixed version display
 
 ## Improvements
-* Minimal main menu
+* Removed some elements on the main menu
+* Item durability and damage display in the tooltip
 
 ## Instructions
 
