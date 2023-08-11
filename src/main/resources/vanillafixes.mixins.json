@@ -1,15 +1,21 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "turniplabs.vanillafixes.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-    ],
-    "client": [
-        "GuiMainMenuMixin",
-        "DisplayListMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "turniplabs.vanillafixes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "GlobalMixin",
+    "GuiTooltipMixin",
+    "MinecraftMixin",
+    "PlayerControllerMixin",
+    "SoundManagerMixin",
+    "ToolMaterialMixin"
+  ],
+  "client": [
+    "DisplayListMixin",
+    "GuiMainMenuMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
