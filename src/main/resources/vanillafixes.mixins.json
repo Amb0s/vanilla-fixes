@@ -6,7 +6,6 @@
   "mixins": [
     "GlobalMixin",
     "GuiTooltipMixin",
-    "MinecraftMixin",
     "PlayerControllerMixin",
     "SoundManagerMixin",
     "ToolMaterialMixin"
