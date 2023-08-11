@@ -8,5 +8,4 @@
 
 ## Instructions
 
-Soon...
-
+Check the [BTA! modding wiki page](https://bta.miraheze.org/wiki/Modding)
