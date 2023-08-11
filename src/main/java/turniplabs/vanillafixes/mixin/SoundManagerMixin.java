@@ -26,11 +26,11 @@ final class SoundManagerMixin {
         // (MultiMC users should be happy)
         Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
 
-        if (args.get(0) == "minecraft-bta/resources/mod/sound") {
+        if (args.get(0).equals("minecraft-bta/resources/mod/sound")) {
             args.set(0, mc.getMinecraftDir() + "/resources/mod/sound");
-        } else if (args.get(0) == "minecraft-bta/resources/mod/streaming") {
+        } else if (args.get(0).equals("minecraft-bta/resources/mod/streaming")) {
             args.set(0, mc.getMinecraftDir() + "/resources/mod/streaming");
-        } else if (args.get(0) == "minecraft-bta/resources/mod/music") {
+        } else if (args.get(0).equals("minecraft-bta/resources/mod/music")) {
             args.set(0, mc.getMinecraftDir() + "/resources/mod/music");
         } else {
             args.set(0, mc.getMinecraftDir() + "/resources/mod/cavemusic");

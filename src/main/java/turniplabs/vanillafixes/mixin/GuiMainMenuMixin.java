@@ -24,8 +24,8 @@ final class GuiMainMenuMixin extends GuiScreen {
     }
 
     @ModifyArgs(method = "drawScreen", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/render/FontRenderer;drawCenteredString(Ljava/lang/String;III)V", ordinal = 0),
-            require = 0)
+            target = "Lnet/minecraft/client/render/FontRenderer;drawCenteredString(Ljava/lang/String;III)V",
+            ordinal = 0), require = 0)
     private void removeDownloadingResourcesString(Args args) {
         args.set(0, "");
     }
