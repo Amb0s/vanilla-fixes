@@ -21,11 +21,11 @@ final class GuiTooltipMixin extends Gui {
     @Shadow
     Minecraft mc;
 
-    // Stores hovered inventory slot.
     private Slot hoveredSlot;
 
     @Inject(method = "getTooltipText", at = @At("HEAD"))
     private void getSlot(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable cir) {
+        // Stores hovered inventory slot.
         hoveredSlot = slot;
     }
 
@@ -36,42 +36,32 @@ final class GuiTooltipMixin extends Gui {
         // Target: text.append(itemName)
         stringBuilder.append(str);
 
-        // Gets player inventory.
-        InventoryPlayer inventory = mc.thePlayer.inventory;
+        if (mc.gameSettings.heldItemCountOverlay.value) {
+            // Gets player inventory.
+            InventoryPlayer inventory = mc.thePlayer.inventory;
 
-        // Disables the unused option (just to be safe).
-        mc.gameSettings.showItemDurability.value = false;
+            if (inventory.getHeldItemStack() == null && hoveredSlot != null && hoveredSlot.hasStack() &&
+                    hoveredSlot.getStack().getItemName() != null) { // If the slot isn't empty...
+                if (hoveredSlot.getStack().getItem() instanceof ItemToolSword ||
+                        hoveredSlot.getStack().getItem() instanceof ItemTool) { // If it's a sword or a tool...
 
-        if (inventory.getHeldItemStack() == null && hoveredSlot != null &&
-                hoveredSlot.hasStack() && hoveredSlot.getStack().getItemName() != null) { // If the slot isn't empty...
-            if (hoveredSlot.getStack().getItem() instanceof ItemToolSword ||
-                    hoveredSlot.getStack().getItem() instanceof ItemTool) { // If it's a sword or a tool...
+                    // Gets durability.
+                    int toolDurability = hoveredSlot.getStack().getMaxDamage() - hoveredSlot.getStack()
+                            .getItemDamageForDisplay();
 
-                // Gets durability.
-                int toolDurability = hoveredSlot.getStack().getMaxDamage() - hoveredSlot.getStack()
-                        .getItemDamageForDisplay();
+                    // Gets damage.
+                    int toolDamage = hoveredSlot.getStack().getItem().getDamageVsEntity(null);
 
-                // Gets damage.
-                int toolDamage = hoveredSlot.getStack().getItem().getDamageVsEntity(null);
+                    /* Formats durability display */
+                    String durabilityTooltip = "Durability: " + toolDurability + "/" + hoveredSlot
+                            .getStack()
+                            .getMaxDamage();
+                    stringBuilder.append('\n').append(TextFormatting.LIGHT_GRAY).append(durabilityTooltip);
 
-                /* Formats durability display */
-                String durabilityTooltip = (new StringBuilder())
-                        .append("Durability: ")
-                        .append(toolDurability)
-                        .append("/")
-                        .append(hoveredSlot
-                                .getStack()
-                                .getMaxDamage())
-                        .toString();
-                stringBuilder.append('\n').append(TextFormatting.LIGHT_GRAY + durabilityTooltip);
-
-                /* Formats damage display */
-                String damageTooltip = (new StringBuilder())
-                        .append("+")
-                        .append(toolDamage)
-                        .append(" Attack Damage")
-                        .toString();
-                stringBuilder.append('\n').append(TextFormatting.LIGHT_GRAY + damageTooltip);
+                    /* Formats damage display */
+                    String damageTooltip = "+" + toolDamage + " Attack Damage";
+                    stringBuilder.append('\n').append(TextFormatting.LIGHT_GRAY).append(damageTooltip);
+                }
             }
         }
 
