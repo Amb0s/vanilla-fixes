@@ -4,11 +4,16 @@
   "package": "turniplabs.vanillafixes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChunkProviderStaticMixin",
     "GlobalMixin",
+    "GuiIngameMixin",
     "GuiTooltipMixin",
+    "MinecraftMixin",
     "PlayerControllerMixin",
+    "RenderGlobalMixin",
     "SoundManagerMixin",
-    "ToolMaterialMixin"
+    "ToolMaterialMixin",
+    "WorldRendererMixin"
   ],
   "client": [
     "DisplayListMixin",
