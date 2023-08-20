@@ -23,10 +23,4 @@ public class WorldRendererMixin {
     private void fixFogEnd(Args args) {
         args.set(1, farPlaneDistance * 32);
     }
-
-    @ModifyArgs(method = "setupFog", at = @At(value = "INVOKE",
-            target = "Lorg/lwjgl/opengl/GL11;glFogf(IF)V", ordinal = 4), require = 0)
-    private void fixFogDensity(Args args) {
-        args.set(1, 0.0f);
-    }
 }
