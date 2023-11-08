@@ -4,7 +4,6 @@
 * Removed jittering
 * Reduced block hit delay
 * Changed mod resources directory path
-* Fixed version display
 
 ## Improvements
 * Removed some elements on the main menu
