@@ -1,10 +1,12 @@
 # Vanilla Fixes
 
 ## Fixes
+
 * Removed jittering
 * Changed mod resources directory path
 
 ## Improvements
+
 * Removed some elements on the main menu
 * Item durability and damage display in the tooltip
 
