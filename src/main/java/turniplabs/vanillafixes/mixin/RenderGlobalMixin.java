@@ -31,9 +31,13 @@ final class RenderGlobalMixin {
 
     @Redirect(method = "renderSortedRenderers", at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 0))
-    private void cancelCallglEnable(int cap) {}
+    private void cancelCallglEnable(int cap) {
+        // Fix fog rendering underwater.
+    }
 
     @Redirect(method = "renderSortedRenderers", at = @At(value = "INVOKE",
             target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0))
-    private void cancelCallglDisable(int cap) {}
+    private void cancelCallglDisable(int cap) {
+        // Fix fog rendering underwater.
+    }
 }

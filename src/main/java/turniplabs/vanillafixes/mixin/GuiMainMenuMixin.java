@@ -9,18 +9,16 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(value = GuiMainMenu.class, remap = false)
 final class GuiMainMenuMixin extends GuiScreen {
-    @Inject(method = "initGui", at = @At("RETURN"), require = 0)
+    @Inject(method = "init", at = @At("RETURN"), require = 0)
     private void removeLinks(CallbackInfo ci) {
         controlList.removeIf(button ->
                 button.id == 5 /* Discord */ || button.id == 6 /* Minecraft Forums */ ||
                 button.id == 7 /* Youtube */);
     }
 
-    @Inject(method = "initGui", at = @At("RETURN"), require = 0)
+    @Inject(method = "init", at = @At("RETURN"), require = 0)
     private void removeButtons(CallbackInfo ci) {
-        controlList.removeIf(button ->
-                button.id == 3 /* Texture packs */ || button.id == 8 /* Languages */ ||
-                button.id == 100 /* Mod menu */);
+        controlList.removeIf(button -> button.id == 8 /* Languages */);
     }
 
     @ModifyArgs(method = "drawScreen", at = @At(value = "INVOKE",

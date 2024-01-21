@@ -8,11 +8,9 @@
     "GuiIngameMixin",
     "GuiTooltipMixin",
     "MinecraftMixin",
-    "PlayerControllerMixin",
     "RenderGlobalMixin",
     "SoundManagerMixin",
-    "ToolMaterialMixin",
-    "WorldRendererMixin"
+    "FogManagerMixin"
   ],
   "client": [
     "DisplayListMixin",

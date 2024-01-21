@@ -23,17 +23,15 @@ final class GuiTooltipMixin extends Gui {
 
     private Slot hoveredSlot;
 
-    @Inject(method = "getTooltipText", at = @At("HEAD"))
-    private void getSlot(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable cir) {
+    @Inject(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At("HEAD"))
+    private void getSlot(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<Object> cir) {
         // Stores hovered inventory slot.
         hoveredSlot = slot;
     }
 
-    @Redirect(method = "getTooltipText", at = @At(value = "INVOKE",
-            target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;", ordinal = 2))
+    @Redirect(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At(value = "INVOKE",
+            target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;", ordinal = 0))
     private StringBuilder addStats(StringBuilder stringBuilder, String str) {
-        // The first calls to 'append' in the original method come from translateKey params.
-        // Target: text.append(itemName)
         stringBuilder.append(str);
 
         if (mc.gameSettings.heldItemCountOverlay.value) {
