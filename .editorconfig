@@ -27,4 +27,3 @@ tab_width = 2
 [*.properties]
 indent_style = space
 indent_size = 2
-
