@@ -4,12 +4,14 @@
 
 * Removed jittering
 * Changed mod resources directory path
+* Disabled fog on Extreme render distance
 
 ## Improvements
 
 * Removed some elements on the main menu
-* Item durability and damage display in the tooltip
+* Added item durability and damage display in the tooltip
+* F3 debug menu
 
 ## Instructions
 
-Check the [BTA! modding wiki page](https://bta.miraheze.org/wiki/Modding)
+Check the [BTA wiki modding page](https://bta.miraheze.org/wiki/Modding)
