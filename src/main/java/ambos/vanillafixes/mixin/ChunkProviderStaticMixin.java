@@ -1,4 +1,4 @@
-package turniplabs.vanillafixes.mixin;
+package ambos.vanillafixes.mixin;
 
 import net.minecraft.client.world.chunk.provider.ChunkProviderStatic;
 import org.spongepowered.asm.mixin.Mixin;

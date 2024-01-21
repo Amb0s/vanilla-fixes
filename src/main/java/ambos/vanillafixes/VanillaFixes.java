@@ -1,4 +1,4 @@
-package turniplabs.vanillafixes;
+package ambos.vanillafixes;
 
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -10,6 +10,6 @@ public class VanillaFixes implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("VanillaFixes initialized");
+        LOGGER.info("Vanilla Fixes initialized");
     }
 }

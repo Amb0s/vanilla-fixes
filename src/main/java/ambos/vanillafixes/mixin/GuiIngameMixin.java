@@ -1,4 +1,4 @@
-package turniplabs.vanillafixes.mixin;
+package ambos.vanillafixes.mixin;
 
 import net.minecraft.client.gui.GuiIngame;
 import org.spongepowered.asm.mixin.Mixin;

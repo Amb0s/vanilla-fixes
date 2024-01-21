@@ -8,16 +8,16 @@
     "Ambos"
   ],
   "contact": {
-    "homepage": "https://github.com/Turnip-Labs",
-    "sources": "https://github.com/Turnip-Labs/vanilla-fixes",
-    "issues": "https://github.com/Turnip-Labs/vanilla-fixes/issues"
+    "homepage": "https://memoryshards.xyz",
+    "sources": "https://github.com/amb0s/vanilla-fixes",
+    "issues": "https://github.com/amb0s/vanilla-fixes/issues"
   },
   "license": "MIT",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "turniplabs.vanillafixes.VanillaFixes"
+      "ambos.vanillafixes.VanillaFixes"
     ]
   },
   "mixins": [

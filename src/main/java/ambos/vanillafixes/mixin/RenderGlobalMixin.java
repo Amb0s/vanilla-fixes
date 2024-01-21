@@ -1,4 +1,4 @@
-package turniplabs.vanillafixes.mixin;
+package ambos.vanillafixes.mixin;
 
 import net.minecraft.client.render.RenderGlobal;
 import org.spongepowered.asm.mixin.Mixin;
