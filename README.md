@@ -2,7 +2,6 @@
 
 ## Fixes
 * Removed jittering
-* Reduced block hit delay
 * Changed mod resources directory path
 
 ## Improvements
